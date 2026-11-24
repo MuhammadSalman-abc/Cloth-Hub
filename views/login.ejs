@@ -1,0 +1,36 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeans Store | Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<%- include('partials/site-loader') %>
+    <div class="auth-container">
+        <div class="card auth-card p-4 shadow" style="width: 100%; max-width: 400px;">
+            <h3 class="text-center mb-4">Sign In</h3>
+            <% if (typeof resetComplete !== 'undefined' && resetComplete) { %><div class="alert alert-success">Password reset complete. You can sign in with your new password.</div><% } %>
+            <% if (typeof error !== 'undefined') { %><div class="alert alert-danger"><%= error %></div><% } %>
+            <form action="/login" method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="text-end mb-3"><a href="/forgot-password">Forgot password?</a></div>
+                <button type="submit" class="btn btn-custom w-100">Login</button>
+            </form>
+            <div class="text-center mt-3">
+                <p>New here? <a href="/register" class="text-primary decoration-none">Register Here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

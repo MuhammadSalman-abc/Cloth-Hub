@@ -1,0 +1,39 @@
+<div id="site-loader" class="site-loader" role="status" aria-live="polite" aria-hidden="false">
+  <div class="site-loader-content">
+    <img src="/images/vogue-denim-loader.png" alt="Vogue Denim — Wear the Style" class="site-loader-logo">
+    <span class="site-loader-spinner" aria-hidden="true"></span>
+    <span id="site-loader-message" class="site-loader-label">Loading your style…</span>
+  </div>
+</div>
+<script>
+(() => {
+  const loader = document.getElementById('site-loader');
+  const message = document.getElementById('site-loader-message');
+  let shownAt = Date.now();
+  let minimumVisibleMs = 3000;
+  let hideTimer;
+  window.showSiteLoader = (text, minimumMs = 450) => {
+    if (hideTimer) clearTimeout(hideTimer);
+    shownAt = Date.now();
+    minimumVisibleMs = minimumMs;
+    message.textContent = text || 'Loading your style…';
+    loader.classList.remove('is-hidden');
+    loader.setAttribute('aria-hidden', 'false');
+  };
+  window.hideSiteLoader = () => {
+    const delay = Math.max(0, minimumVisibleMs - (Date.now() - shownAt));
+    hideTimer = setTimeout(() => {
+      loader.classList.add('is-hidden');
+      loader.setAttribute('aria-hidden', 'true');
+    }, delay);
+  };
+  const failSafe = setTimeout(window.hideSiteLoader, 12000);
+  window.addEventListener('load', () => {
+    clearTimeout(failSafe);
+    window.hideSiteLoader();
+  }, { once: true });
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) window.hideSiteLoader();
+  });
+})();
+</script>

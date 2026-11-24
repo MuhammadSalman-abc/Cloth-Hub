@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 150" role="img" aria-labelledby="title desc">
+  <title id="title">Vogue Denim</title>
+  <desc id="desc">Gold hanger and denim jacket monogram beside the Vogue Denim wordmark.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff0ad"/><stop offset=".48" stop-color="#d6a94d"/><stop offset="1" stop-color="#9b6b1e"/></linearGradient>
+    <linearGradient id="denim" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#3977a6"/><stop offset="1" stop-color="#102b46"/></linearGradient>
+  </defs>
+  <g transform="translate(12 5)">
+    <path d="M66 31c0-17 13-27 27-27 13 0 22 9 22 20 0 12-8 18-18 26-8 7-12 12-12 23" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="85" cy="82" r="4" fill="#f4d47e"/>
+    <path d="M85 86 17 117l29 13 39-18 39 18 29-13-68-31Z" fill="url(#gold)" stroke="#f5d98e" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m48 112 37-16 37 16-5 29H53l-5-29Z" fill="url(#denim)" stroke="#8db4ca" stroke-width="2"/>
+    <path d="m48 112 19 7 18-8v30H53l-5-29Zm55-1 19 1-5 29H85v-30l18 8 12-8Z" fill="#e9edf0" stroke="#c5ccd0" stroke-width="1.5"/>
+    <path d="M84 111v30m-26-25 10 4m36-4-10 4" stroke="url(#gold)" stroke-width="2"/>
+    <text x="55" y="134" fill="#fff" font-family="Georgia,serif" font-size="26" font-weight="700">V</text>
+    <text x="86" y="134" fill="url(#gold)" font-family="Georgia,serif" font-size="26" font-weight="700">D</text>
+  </g>
+  <text x="184" y="81" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="58" font-weight="700" letter-spacing="1">VOGUE</text>
+  <text x="440" y="81" fill="url(#gold)" font-family="Georgia,'Times New Roman',serif" font-size="58" font-weight="700" letter-spacing="1">DENIM</text>
+  <path d="M187 99h510" stroke="url(#gold)" stroke-width="2"/>
+  <text x="190" y="132" fill="#e7e9eb" font-family="Arial,sans-serif" font-size="18" font-weight="600" letter-spacing="9">JEANS  •  SHIRTS</text>
+  <text x="532" y="132" fill="#d6b66d" font-family="Arial,sans-serif" font-size="14" font-style="italic" letter-spacing="5">WEAR THE STYLE</text>
+</svg>
