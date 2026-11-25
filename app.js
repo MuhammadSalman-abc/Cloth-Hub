@@ -17,10 +17,11 @@ const User = require('./models/User');
 const Product = require('./models/product');
 const Cart = require('./models/Cart');
 const Order = require('./models/Order');
-const LocalSessionStore = require('./models/LocalSessionStore');
+const MongoSessionStore = require('./models/MongoSessionStore');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
+if (process.env.VERCEL) app.set('trust proxy', 1);
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/jeansStore';
 if (MONGODB_URI.startsWith('mongodb+srv://') && process.env.MONGODB_DNS_SERVERS) {
@@ -32,14 +33,33 @@ const STORE_WHATSAPP_NUMBER = String(process.env.STORE_WHATSAPP_NUMBER || '').re
 const ADMIN_EMAIL = String(process.env.ADMIN_EMAIL || '').trim().toLowerCase();
 const allowedSizes = new Set(['30', '32', '34', '36']);
 const allowedColors = new Set(['Default', 'Blue', 'Black']);
+let mongoConnectionPromise;
+
+async function ensureMongoConnection(req, res, next) {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      if (!mongoConnectionPromise) {
+        mongoConnectionPromise = mongoose.connect(MONGODB_URI).catch(error => {
+          mongoConnectionPromise = null;
+          throw error;
+        });
+      }
+      await mongoConnectionPromise;
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false, limit: '20kb' }));
+app.use(ensureMongoConnection);
 app.use(session({
   secret: SESSION_SECRET || 'local-development-only-change-this-secret',
-  store: new LocalSessionStore(path.join(__dirname, '.sessions.json')),
+  store: new MongoSessionStore(),
   resave: false,
   saveUninitialized: false,
   cookie: { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 7 * 24 * 60 * 60 * 1000 }
@@ -478,9 +498,14 @@ app.use((err, req, res, next) => {
   res.status(500).render('error', { message: process.env.NODE_ENV === 'production' ? 'Something went wrong. Please try again.' : err.message });
 });
 
-mongoose.connect(MONGODB_URI).then(() => {
-  app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
-}).catch(err => {
-  console.error('MongoDB connection failed:', err.message);
-  process.exit(1);
-});
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  ensureMongoConnection(null, null, err => {
+    if (err) {
+      console.error('MongoDB connection failed:', err.message);
+      process.exit(1);
+    }
+    app.listen(PORT, () => console.log(`Server started on http://localhost:${PORT}`));
+  });
+}
