@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const dns = require('node:dns');
 const mongoose = require('mongoose');
 const User = require('../models/User');
 
@@ -14,7 +15,12 @@ if (fs.existsSync(envFile)) {
 const email = String(process.env.ADMIN_EMAIL || '').trim().toLowerCase();
 if (!email) { console.error('Set ADMIN_EMAIL in .env first.'); process.exit(1); }
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/jeansStore')
+const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/jeansStore';
+if (mongoUri.startsWith('mongodb+srv://') && process.env.MONGODB_DNS_SERVERS) {
+  dns.setServers(process.env.MONGODB_DNS_SERVERS.split(',').map(server => server.trim()).filter(Boolean));
+}
+
+mongoose.connect(mongoUri)
   .then(async () => {
     const user = await User.findOneAndUpdate({ email }, { $set: { role: 'admin' } }, { returnDocument: 'after' });
     if (!user) {

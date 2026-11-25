@@ -1,4 +1,5 @@
 const express = require('express');
+const dns = require('node:dns');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
@@ -22,6 +23,9 @@ const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/jeansStore';
+if (MONGODB_URI.startsWith('mongodb+srv://') && process.env.MONGODB_DNS_SERVERS) {
+  dns.setServers(process.env.MONGODB_DNS_SERVERS.split(',').map(server => server.trim()).filter(Boolean));
+}
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const stripe = STRIPE_SECRET_KEY ? require('stripe')(STRIPE_SECRET_KEY) : null;
 const STORE_WHATSAPP_NUMBER = String(process.env.STORE_WHATSAPP_NUMBER || '').replace(/\D/g, '');
