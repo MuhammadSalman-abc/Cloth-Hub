@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0ad"/><stop offset=".52" stop-color="#d6a94d"/><stop offset="1" stop-color="#9b6b1e"/></linearGradient>
+    <linearGradient id="denim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3977a6"/><stop offset="1" stop-color="#102b46"/></linearGradient>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="14" fill="#142432" stroke="#d6a94d" stroke-width="2"/>
+  <path d="M31 10c0-5 4-8 8-8 4 0 7 3 7 6 0 4-3 6-6 8-3 2-4 4-4 7" fill="none" stroke="url(#gold)" stroke-width="3" stroke-linecap="round"/>
+  <path d="m36 25-25 15 9 5 16-8 16 8 9-5-25-15Z" fill="url(#gold)" stroke="#f5d98e" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="m19 42 17-8 17 8-2 17H21l-2-17Z" fill="url(#denim)" stroke="#8db4ca" stroke-width="1.5"/>
+  <path d="M36 36v22M23 44l8 3m18-3-8 3" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+  <text x="25" y="56" fill="#fff" font-family="Georgia,serif" font-size="13" font-weight="700">V</text>
+  <text x="37" y="56" fill="url(#gold)" font-family="Georgia,serif" font-size="13" font-weight="700">D</text>
+</svg>

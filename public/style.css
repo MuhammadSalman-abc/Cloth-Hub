@@ -277,6 +277,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px 16px;
 }
 
 .auth-card { 
@@ -290,8 +293,9 @@ body {
     padding: 2rem;
     color: white;
 }
-.auth-brand { display:flex; justify-content:center; margin:0 auto 1.25rem; }
-.auth-brand img { display:block; width:min(100%,280px); height:auto; }
+.auth-brand { display:flex; justify-content:center; width:100%; margin:0 auto 1.25rem; }
+.auth-brand img { display:block; width:min(100%,380px); height:auto; }
+.auth-register-card { width:min(100%,440px)!important; margin-inline:auto; }
 .auth-card h3 { color:#f4d98e; font-weight:700; }
 .auth-card .form-label { color:#fff; font-weight:600; }
 .auth-card .form-control { color:#1b2630; background:#fff; border-color:#d7dce0; }
@@ -300,6 +304,9 @@ body {
 .auth-card a:hover { color:#ffe4a0; }
 .auth-card .btn-custom { color:#17232d; background:#e7bd65; border-color:#e7bd65; font-weight:700; }
 .auth-card .btn-custom:hover { color:#111b22; background:#f2d48c; border-color:#f2d48c; }
+.auth-card p { color:#f3f5f6; }
+.auth-card .auth-account-link a { color:#f2cc73!important; }
+.auth-card .auth-account-link a:hover { color:#ffe4a0!important; }
 
 /* --- Cart & Tables --- */
 .table {
